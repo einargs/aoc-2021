@@ -15,8 +15,8 @@ data Cmd
   deriving Show
 
 parse :: T.Text -> [Cmd]
-parse = fmap f . filter (not . T.null) . T.splitOn "\n" where
-  f t = let [w,it] = T.splitOn " " t
+parse = fmap f . T.lines . T.strip where
+  f t = let [w,it] = T.words t
             Right (i, _) = R.decimal it
              in case w of
                   "forward" -> Forward i
