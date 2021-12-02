@@ -2,6 +2,7 @@ module Main where
 
 import Data.List ((!!))
 import System.Environment
+import Data.Text (Text)
 import qualified Data.Text.IO as TIO
 
 import Day
@@ -11,23 +12,23 @@ import Day2Parser
 days :: [Day]
 days = [day1,day2]
 
-main :: IO ()
-main = do
-  [dayN, partTxt] <- getArgs
-  let day = days !! (read dayN - 1)
-      (partF, partAns) = case partTxt of
-               "part1" -> (dayPart1 day, part1Ans day)
-               "part2" -> (dayPart2 day, part2Ans day)
-               _ -> error "specify part1 or part2"
-  txt <- TIO.readFile $ "inputs/" <> dayN <> ".txt"
-  let ans = partF txt
-      correctness = case partAns of
-                      Just ans' | ans' == ans -> "Correct"
-                                | otherwise -> " Wrong"
-                      Nothing -> ""
+runPart :: Text -> Maybe Text -> IO ()
+runPart ans mbAns = do
   TIO.putStrLn ans
-  case partAns of
+  case mbAns of
     Just ans' | ans' == ans -> TIO.putStrLn "Correct"
               | otherwise -> TIO.putStrLn "Wrong"
     Nothing -> pure ()
 
+main :: IO ()
+main = do
+  [dayN, partTxt] <- getArgs
+  txt <- TIO.readFile $ "inputs/" <> dayN <> ".txt"
+  let day = days !! (read dayN - 1)
+      p1 = runPart (dayPart1 day txt) (part1Ans day)
+      p2 = runPart (dayPart2 day txt) (part2Ans day)
+  case partTxt of
+    "part1" -> p1
+    "part2" -> p2
+    "both" -> p1 *> p2
+    _ -> error "specify part1 or part2"
