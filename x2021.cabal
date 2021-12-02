@@ -23,6 +23,7 @@ source-repository head
 
 library
     exposed-modules:
+          Day
           Day1
           Day1Arrow
           Day2

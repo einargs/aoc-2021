@@ -1,10 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Day2 (run) where
+module Day2 (day2) where
 
 import Data.List (foldl')
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import qualified Data.Text.Read as R
+
+import Day
 
 data Cmd
   = Forward Int
@@ -39,8 +41,6 @@ process2 cs = h*d where
                   Down i -> (h,d,a+i)
                   Up i -> (h,d,a-i)
 
-run1 :: IO ()
-run1 = TIO.interact $ T.pack . show . uncurry (*) . process1 . parse
-
-run :: IO ()
-run = TIO.interact $ T.pack . show . process2 . parse
+day2 :: Day
+day2 = Day (wrap $ uncurry (*) . process1) (wrap process2) where
+  wrap f = T.pack . show . f . parse
