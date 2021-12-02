@@ -23,7 +23,9 @@ source-repository head
 
 library
     exposed-modules:
+          Day1
           Day1Arrow
+          Day2
     other-modules:
           Paths_x2021
     hs-source-dirs:

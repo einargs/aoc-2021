@@ -1,6 +1,6 @@
 module Main where
 
-import qualified Day1Arrow as D1A
+import qualified Day2 as Day
 
 main :: IO ()
-main = D1A.run
+main = Day.run
