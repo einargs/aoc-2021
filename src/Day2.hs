@@ -42,5 +42,6 @@ process2 cs = h*d where
                   Up i -> (h,d,a-i)
 
 day2 :: Day
-day2 = Day (wrap $ uncurry (*) . process1) (wrap process2) where
+day2 = Day (wrap $ uncurry (*) . process1) (wrap process2)
+  (Just "2073315") (Just "1840311528") where
   wrap f = T.pack . show . f . parse

@@ -27,6 +27,7 @@ library
           Day1
           Day1Arrow
           Day2
+          Day2Parser
     other-modules:
           Paths_x2021
     hs-source-dirs:
@@ -62,6 +63,7 @@ library
     build-depends:
           base >=4.7 && <5
         , containers >=0.6.2
+        , megaparsec >=9.2.0
         , mtl >=2.2
         , text >=1.2
         , transformers >=0.5.6
@@ -105,6 +107,7 @@ executable x2021-exe
     build-depends:
           base >=4.7 && <5
         , containers >=0.6.2
+        , megaparsec >=9.2.0
         , mtl >=2.2
         , text >=1.2
         , transformers >=0.5.6

@@ -24,4 +24,4 @@ wrap :: ([Int] -> Int) -> T.Text -> T.Text
 wrap f = T.pack . show . f . parse
 
 day1 :: Day
-day1 = Day (wrap process1) (wrap process2)
+day1 = Day (wrap process1) (wrap process2) (Just "1139") (Just "1103")
