@@ -28,6 +28,7 @@ library
           Day1Arrow
           Day2
           Day2Parser
+          Day3
     other-modules:
           Paths_x2021
     hs-source-dirs:
