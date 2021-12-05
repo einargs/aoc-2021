@@ -10,8 +10,6 @@ import Control.Arrow
 
 import Day
 
-data Void deriving (Eq,Ord)
-
 parseBin :: T.Text -> Int
 parseBin = P.parse p "" >>> (error "parse error" ||| id) where
   p :: P.Parsec Void T.Text Int

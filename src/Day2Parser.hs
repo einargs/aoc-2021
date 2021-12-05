@@ -11,8 +11,6 @@ import Control.Arrow
 
 import Day
 
-data Void deriving (Eq,Ord)
-
 data Cmd
   = Forward Int
   | Down Int

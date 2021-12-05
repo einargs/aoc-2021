@@ -9,9 +9,10 @@ import Day
 import Day1Arrow
 import Day2Parser
 import Day3
+import Day4
 
 days :: [Day]
-days = [day1,day2,day3]
+days = [day1,day2,day3,day4]
 
 runPart :: Text -> Maybe Text -> IO ()
 runPart ans mbAns = do

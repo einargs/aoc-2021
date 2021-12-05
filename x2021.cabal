@@ -29,6 +29,7 @@ library
           Day2
           Day2Parser
           Day3
+          Day4
     other-modules:
           Paths_x2021
     hs-source-dirs:
@@ -66,6 +67,7 @@ library
         , containers >=0.6.2
         , megaparsec >=9.2.0
         , mtl >=2.2
+        , parser-combinators >=1.3.0
         , text >=1.2
         , transformers >=0.5.6
     default-language: Haskell2010
@@ -110,6 +112,7 @@ executable x2021-exe
         , containers >=0.6.2
         , megaparsec >=9.2.0
         , mtl >=2.2
+        , parser-combinators >=1.3.0
         , text >=1.2
         , transformers >=0.5.6
         , x2021
