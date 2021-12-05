@@ -2,10 +2,11 @@ module Day5 (day5) where
 
 import qualified Data.Text as T
 import qualified Text.Megaparsec as P
+import Text.Megaparsec ((<|>), sepBy)
 import qualified Text.Megaparsec.Char as C
 import qualified Text.Megaparsec.Char.Lexer as L
+import Text.Megaparsec.Debug (dbg)
 import Control.Monad
-import Control.Applicative ((<|>))
 import Data.List (transpose, foldl', find)
 import Control.Arrow
 import Data.Map (Map)
@@ -19,9 +20,9 @@ type Lines = [(Point, Point)]
 type Board = Map (Int,Int) Int
 
 parse :: T.Text -> Lines
-parse = runParse $ P.many (line <* P.optional C.newline) where
-  point = P.try $ (,) <$> (L.decimal <* C.string ",") <*> L.decimal
-  line = P.try $ (,) <$> (point <* C.string " -> ") <*> point
+parse = runParse $ P.many $ line <* C.newline where
+  point = (,) <$> (L.decimal <* C.string ",") <*> L.decimal
+  line = (,) <$> (point <* C.string " -> ") <*> point
 
 axialLines :: Lines -> Lines
 axialLines = filter f where
@@ -42,8 +43,7 @@ addLines = f M.empty where
     | y1 == y2 = addPoints m $ [(x,y1) | x <- bwt x1 x2]
     | otherwise = addPoints m $ zip (bwt x1 x2) (bwt y1 y2)
   f b [] = b
-  f m ((p1, p2):ls') =
-    f (addLine m p1 p2) ls'
+  f m ((p1, p2):ls') = f (addLine m p1 p2) ls'
 
 countOverlaps :: Board -> Int
 countOverlaps = length . filter (>1) . M.elems
