@@ -30,6 +30,7 @@ library
           Day2Parser
           Day3
           Day4
+          Day5
     other-modules:
           Paths_x2021
     hs-source-dirs:
