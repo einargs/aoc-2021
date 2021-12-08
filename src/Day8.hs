@@ -84,6 +84,8 @@ deriveSolution ds = fromJust $ find (checkSolution ds) $ do
   sol <- permutations [A .. G]
   let sol' = toSol sol
       sg = sizeGuard sol'
+  -- NOTE: I could definitely encode this as a data structure and derive the
+  -- ordering on the fly. However, I don't think it's worth it.
   sg 2 [1]
   sg 4 [4]
   sg 3 [7]
