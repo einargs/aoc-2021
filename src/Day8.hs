@@ -83,16 +83,20 @@ deriveSolution :: [Disp] -> Seg -> Seg
 deriveSolution ds = fromJust $ find (checkSolution ds) $ do
   sol <- permutations [A .. G]
   let sol' = toSol sol
-  eqGuard sol' 1 2
-  eqGuard sol' 4 4
-  eqGuard sol' 7 3
-  eqGuard sol' 8 7
+      sg = sizeGuard sol'
+  sg 2 [1]
+  sg 4 [4]
+  sg 3 [7]
+  sg 7 [8]
+  sg 6 [0,6,9]
+  sg 5 [2,3,5]
   pure sol'
   where
-    -- Get the display with the given size
-    getDisp size = fromJust $ find ((==size) . S.size) ds
-    eqGuard sol trueIndex size = guard $
-      S.map sol (getDisp size) == (segments !! trueIndex)
+    sizeGuard sol size possibleIndices = guard cond where
+      scrambled = S.map sol <$> filter ((==size) . S.size) ds
+      trues = (segments !!) <$> possibleIndices
+      pairGroups = uncurry zip <$> zip (repeat scrambled) (permutations trues)
+      cond = any (all $ uncurry (==)) pairGroups
 
 calculateOutput :: Entry -> Int
 calculateOutput e@(Entry ins out) = mkNum $ key <$> out where
